@@ -21,10 +21,12 @@ RUN set -ex \
 		bison \
 		dpkg-dev \
 		libgdbm-dev \
+		libjemalloc-dev \
 		ruby \
 	' \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends $buildDeps \
+	&& apt-get install -y --no-install-recommends libjemalloc1 \
 	&& rm -rf /var/lib/apt/lists/* \
 	\
 	&& wget -O ruby.tar.xz "https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz" \
@@ -50,6 +52,7 @@ RUN set -ex \
 	&& ./configure \
 		--build="$gnuArch" \
 		--disable-install-doc \
+		--with-jemalloc \
 		--enable-shared \
 	&& make -j "$(nproc)" \
 	&& make install \

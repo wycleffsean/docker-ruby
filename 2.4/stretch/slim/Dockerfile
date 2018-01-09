@@ -6,6 +6,7 @@ RUN apt-get update \
 		ca-certificates \
 		libffi-dev \
 		libgdbm3 \
+		libjemalloc1 \
 		libssl-dev \
 		libyaml-dev \
 		procps \
@@ -37,6 +38,7 @@ RUN set -ex \
 		libbz2-dev \
 		libgdbm-dev \
 		libglib2.0-dev \
+		libjemalloc-dev \
 		libncurses-dev \
 		libreadline-dev \
 		libxml2-dev \
@@ -74,6 +76,7 @@ RUN set -ex \
 		--build="$gnuArch" \
 		--disable-install-doc \
 		--enable-shared \
+		--with-jemalloc \
 	&& make -j "$(nproc)" \
 	&& make install \
 	\

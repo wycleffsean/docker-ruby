@@ -29,6 +29,7 @@ RUN set -ex \
 		gcc \
 		gdbm-dev \
 		glib-dev \
+		jemalloc-dev \
 		libc-dev \
 		libffi-dev \
 		openssl \
@@ -72,6 +73,7 @@ RUN set -ex \
 		--build="$gnuArch" \
 		--disable-install-doc \
 		--enable-shared \
+		--with-jemalloc \
 	&& make -j "$(nproc)" \
 	&& make install \
 	\
@@ -84,6 +86,7 @@ RUN set -ex \
 	&& apk add --virtual .ruby-rundeps $runDeps \
 		bzip2 \
 		ca-certificates \
+		jemalloc \
 		libffi-dev \
 		openssl-dev \
 		procps \
